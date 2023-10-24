@@ -9,6 +9,7 @@ import LoadingPage from "./pages/LoadingPage";
 
 function App() {
   const apiUrl = import.meta.env.VITE_API_URL;
+  console.log("API URL:", import.meta.env.VITE_API_URL);
 
   // http://localhost:3000
   // https://hr-api-tp77.onrender.com
@@ -28,13 +29,16 @@ function App() {
 
     if (uid && client && accessToken) {
       try {
-        const response = await axios.get(`${apiUrl}/remember_me`, {
-          headers: {
-            uid: uid,
-            client: client,
-            "access-token": accessToken,
-          },
-        });
+        const response = await axios.get(
+          `https://hr-api-tp77.onrender.com/remember_me`,
+          {
+            headers: {
+              uid: uid,
+              client: client,
+              "access-token": accessToken,
+            },
+          }
+        );
         if (response.status === 200) {
           const responseData = response.data;
           console.log(responseData);
