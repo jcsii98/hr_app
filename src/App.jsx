@@ -9,10 +9,7 @@ import LoadingPage from "./pages/LoadingPage";
 
 function App() {
   const apiUrl = import.meta.env.VITE_API_URL;
-  console.log("API URL:", import.meta.env.VITE_API_URL);
-
-  // http://localhost:3000
-  // https://hr-api-tp77.onrender.com
+  console.log("API URL:", apiUrl);
 
   // ui states
   const [isLoggedIn, setIsLoggedIn] = useState();
@@ -20,7 +17,7 @@ function App() {
 
   // variables
   const [userData, setUserData] = useState();
-  const [headers, setHeaders] = useState();
+  const [headers, setHeaders] = useState(); // NOTE: this is unused currently
 
   const rememberMe = async () => {
     const uid = localStorage.getItem("uid");
@@ -29,16 +26,14 @@ function App() {
 
     if (uid && client && accessToken) {
       try {
-        const response = await axios.get(
-          `https://hr-api-tp77.onrender.com/remember_me`,
-          {
-            headers: {
-              uid: uid,
-              client: client,
-              "access-token": accessToken,
-            },
-          }
-        );
+        const response = await axios.get(`${apiUrl}/remember_me`, {
+          headers: {
+            uid: uid,
+            client: client,
+            "access-token": accessToken,
+          },
+        });
+
         if (response.status === 200) {
           const responseData = response.data;
           console.log(responseData);
@@ -47,12 +42,13 @@ function App() {
           setIsLoading(false);
         } else {
           const errorData = response.data;
+          console.warn("Unexpected response:", response); // Added this line
           console.log(errorData);
           setIsLoading(false);
         }
       } catch (error) {
+        console.error("Error with rememberMe:", error);
         setIsLoading(false);
-        // error case
       }
     }
   };
@@ -64,29 +60,25 @@ function App() {
   return (
     <>
       {isLoading ? (
-        <>
-          <LoadingPage />
-        </>
+        <LoadingPage />
       ) : (
-        <>
-          <div className="h-full w-full px-6 py-8 flex flex-col">
-            {isLoggedIn ? (
-              <DashPage
-                userData={userData}
-                setUserData={setUserData}
-                setIsLoggedIn={setIsLoggedIn}
-                apiUrl={apiUrl}
-              />
-            ) : (
-              <AuthPage
-                userData={userData}
-                setUserData={setUserData}
-                setIsLoggedIn={setIsLoggedIn}
-                apiUrl={apiUrl}
-              />
-            )}
-          </div>
-        </>
+        <div className="h-full w-full px-6 py-8 flex flex-col">
+          {isLoggedIn ? (
+            <DashPage
+              userData={userData}
+              setUserData={setUserData}
+              setIsLoggedIn={setIsLoggedIn}
+              apiUrl={apiUrl}
+            />
+          ) : (
+            <AuthPage
+              userData={userData}
+              setUserData={setUserData}
+              setIsLoggedIn={setIsLoggedIn}
+              apiUrl={apiUrl}
+            />
+          )}
+        </div>
       )}
     </>
   );
