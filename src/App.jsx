@@ -64,7 +64,7 @@ function App() {
       {isLoading ? (
         <LoadingPage />
       ) : (
-        <div className="h-full w-full px-6 py-8 flex flex-col">
+        <div className="overflow-y-hidden h-full w-full px-6 py-8 flex flex-col">
           {isLoggedIn ? (
             <DashPage
               userData={userData}
