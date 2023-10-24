@@ -8,7 +8,10 @@ import DashPage from "./pages/DashPage";
 import LoadingPage from "./pages/LoadingPage";
 
 function App() {
-  const apiUrl = "http://localhost:3000";
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+  // http://localhost:3000
+  // https://hr-api-tp77.onrender.com
 
   // ui states
   const [isLoggedIn, setIsLoggedIn] = useState();
