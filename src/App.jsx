@@ -50,6 +50,8 @@ function App() {
         console.error("Error with rememberMe:", error);
         setIsLoading(false);
       }
+    } else {
+      setIsLoading(false);
     }
   };
 
