@@ -3,3 +3,7 @@
   height: 100vh;
   background-color: #e2e8f0;
 }
+
+*:focus {
+  outline: none;
+}

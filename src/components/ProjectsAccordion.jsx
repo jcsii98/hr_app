@@ -37,7 +37,7 @@ export default function ProjectsAccordion(props) {
 
   return (
     <>
-      <div className="my-4 bg-white rounded-md p-6" tabIndex="0">
+      <div className="my-4 bg-white rounded-md p-6 outline-none" tabIndex="0">
         <div
           onClick={() => {
             setIsOpen(!isOpen);
