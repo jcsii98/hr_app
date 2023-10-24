@@ -8,7 +8,7 @@ export default function ProjectsAccordion(props) {
     props;
 
   const [projects, setProjects] = useState(allProjects);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setProjects(allProjects);
@@ -39,29 +39,23 @@ export default function ProjectsAccordion(props) {
     <>
       <div className="my-4 bg-white rounded-md p-6 outline-none" tabIndex="0">
         <div
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
+          // onClick={() => {
+          //   setIsOpen(!isOpen);
+          // }}
           className=""
         >
           <div className="flex items-center justify-between">
             <div className="text-xl font-black text-slate-400">
               {name} — {renderProjects(projectsFilter)?.length || 0}
             </div>
-            <BsChevronDown
+            {/* <BsChevronDown
               className={`h-6 w-6 transition-all duration-500 text-slate-400 ${
                 isOpen ? "rotate-180" : ""
               }`}
-            />
+            /> */}
           </div>
         </div>
-        <div
-          className={`transition-all ${
-            isOpen
-              ? "visible max-h-screen opacity-100"
-              : "invisible max-h-0 opacity-0"
-          } duration-500`}
-        >
+        <div className="transition-all max-h-screen duration-500">
           <div className="h-[1rem]"></div>
           <div className="h-[100px] bg-slate-100 rounded-md p-6 flex space-x-4 overflow-x-auto">
             {name == "All Projects" && (
