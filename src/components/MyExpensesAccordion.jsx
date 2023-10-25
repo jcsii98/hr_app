@@ -39,8 +39,10 @@ export default function MyExpensesAccordion(props) {
   };
 
   const fetchExpenses = async () => {
-    setExpenses();
     const url = `${apiUrl}/expenses?status=all`;
+
+    setError();
+    setExpenses();
     setMessage(
       `Searching for ${userData.first_name}'s transactions for ${projectView.name}`
     );
@@ -67,6 +69,7 @@ export default function MyExpensesAccordion(props) {
     } catch (error) {
       console.error("Error in fetchExpenses:", error);
       setExpensesFound(false);
+      setMessage();
       setError(error.response.data.error);
     }
   };
