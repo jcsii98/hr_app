@@ -67,6 +67,7 @@ export default function MyExpensesAccordion(props) {
     } catch (error) {
       console.error("Error in fetchExpenses:", error);
       setExpensesFound(false);
+      setError(error.response.data.error);
     }
   };
   return (
