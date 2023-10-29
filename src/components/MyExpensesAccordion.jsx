@@ -3,6 +3,7 @@ import axios from "axios";
 import { format, subDays } from "date-fns";
 
 import ExpensesFound from "./ExpensesFound";
+import ExpensesView from "./ExpensesView";
 import DateRangePickerComponent from "./DateRangePickerComponent";
 import { BsChevronDown } from "react-icons/bs";
 
@@ -12,9 +13,10 @@ export default function MyExpensesAccordion(props) {
   // ui states
   const [error, setError] = useState();
   const [message, setMessage] = useState();
-  const [expensesFound, setExpensesFound] = useState(false);
+  const [expensesAccordionTab, setExpensesAccordionTab] = useState("Home");
 
   // variable states
+  const [viewExpense, setViewExpense] = useState();
   const [expenses, setExpenses] = useState();
   const initialStartDate = subDays(new Date(), 7);
   const initialEndDate = new Date();
@@ -61,15 +63,13 @@ export default function MyExpensesAccordion(props) {
         console.log(data);
         if (data.length < 1) {
           setMessage("No expenses found");
-          setExpensesFound(false);
         } else {
           setExpenses(data);
-          setExpensesFound(true);
+          setExpensesAccordionTab("Expenses Found");
         }
       }
     } catch (error) {
       console.error("Error in fetchExpenses:", error);
-      setExpensesFound(false);
       setMessage();
       setError(error.response.data.error);
     }
@@ -101,9 +101,12 @@ export default function MyExpensesAccordion(props) {
               : "invisible max-h-0 opacity-0"
           } duration-500`}
         >
-          {expensesFound && (
+          <div className="h-[1rem]"></div>
+          {expensesAccordionTab == "Expenses Found" && (
             <>
               <ExpensesFound
+                setViewExpense={setViewExpense}
+                setExpensesAccordionTab={setExpensesAccordionTab}
                 apiUrl={apiUrl}
                 expenses={expenses}
                 searchFormData={searchFormData}
@@ -111,9 +114,8 @@ export default function MyExpensesAccordion(props) {
             </>
           )}
 
-          {!expensesFound && (
+          {expensesAccordionTab == "Home" && (
             <>
-              <div className="h-[1rem]"></div>
               <div className="bg-slate-100 rounded-md p-6 flex flex-col items-center">
                 <DateRangePickerComponent
                   startDate={startDate}
@@ -159,6 +161,15 @@ export default function MyExpensesAccordion(props) {
                   </button>
                 </div>
               </div>
+            </>
+          )}
+
+          {expensesAccordionTab == "View" && (
+            <>
+              <ExpensesView
+                setExpensesAccordionTab={setExpensesAccordionTab}
+                viewExpense={viewExpense}
+              />
             </>
           )}
         </div>
