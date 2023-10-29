@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+// import React from "react";
+// import Clock from "react-live-clock";
 
 import LoadingPage from "./LoadingPage";
 
@@ -120,6 +122,11 @@ export default function DashPage(props) {
             <>
               {dashTab == "Home" && (
                 <>
+                  {/* <Clock
+                    date={"1997-12-31T14:15:23+01:00"}
+                    format={"dddd, MMMM Mo, YYYY, h:mm:ss A"}
+                    timezone={"Australia/Sydney"}
+                  /> */}
                   <div className="flex flex-col space-y-4">
                     <div className="flex items-center">
                       <div className="text-3xl font-black text-slate-600">
