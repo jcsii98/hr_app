@@ -34,7 +34,7 @@ export default function ProjectView(props) {
             <div className="text-2xl font-black text-slate-400">
               Payroll / Shifts
             </div>
-            <div className="text-2xl font-black text-slate-400">Misc.</div>
+            {/* <div className="text-2xl font-black text-slate-400">Misc.</div> */}
           </>
         )}
         {tab == "Expenses" && (

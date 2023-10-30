@@ -26,13 +26,13 @@ export default function ProjectExpenses(props) {
         openSection={openSection}
         setOpenSection={setOpenSection}
       />
-      <ProjectPayslipsAccordion
+      {/* <ProjectPayslipsAccordion
         apiUrl={apiUrl}
         projectView={projectView}
         userData={userData}
         openSection={openSection}
         setOpenSection={setOpenSection}
-      />
+      /> */}
     </>
   );
 }
