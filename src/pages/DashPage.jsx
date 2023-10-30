@@ -60,6 +60,11 @@ export default function DashPage(props) {
     }
   };
 
+  const handleSignOutClicked = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+  };
+
   // const fetchAllProjects = async () => {
   //   const url = `${apiUrl}/sites?status=all`;
 
@@ -133,7 +138,12 @@ export default function DashPage(props) {
                         Admin Dashboard
                       </div>
                     </div>
-
+                    <div
+                      onClick={() => setDashTab("Home")}
+                      className="text-2xl font-black text-slate-400"
+                    >
+                      My Profile
+                    </div>
                     <div
                       onClick={() => setDashTab("Projects")}
                       className="text-2xl font-black text-slate-400"
@@ -145,6 +155,12 @@ export default function DashPage(props) {
                       className="text-2xl font-black text-slate-400"
                     >
                       Personnel Management
+                    </div>
+                    <div
+                      onClick={handleSignOutClicked}
+                      className="text-2xl font-black text-slate-400"
+                    >
+                      Sign Out
                     </div>
                   </div>
                 </>
