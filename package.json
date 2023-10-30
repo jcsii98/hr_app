@@ -12,12 +12,14 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "axios": "^1.5.1",
+    "chroma-js": "^2.4.2",
     "date-fns": "^2.30.0",
     "moment": "^2.18.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
-    "react-live-clock": "^6.1.16"
+    "react-live-clock": "^6.1.16",
+    "react-select": "^5.7.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

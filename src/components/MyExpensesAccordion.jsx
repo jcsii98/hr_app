@@ -4,8 +4,10 @@ import { format, subDays } from "date-fns";
 
 import ExpensesFound from "./ExpensesFound";
 import ExpensesView from "./ExpensesView";
+import ExpensesEdit from "./ExpensesEdit";
 import DateRangePickerComponent from "./DateRangePickerComponent";
 import { BsChevronDown } from "react-icons/bs";
+import ScopeSelect from "./ScopeSelect";
 
 export default function MyExpensesAccordion(props) {
   const { apiUrl, projectView, userData, openSection, setOpenSection } = props;
@@ -16,6 +18,7 @@ export default function MyExpensesAccordion(props) {
   const [expensesAccordionTab, setExpensesAccordionTab] = useState("Home");
 
   // variable states
+
   const [viewExpense, setViewExpense] = useState();
   const [expenses, setExpenses] = useState();
   const initialStartDate = subDays(new Date(), 7);
@@ -64,6 +67,7 @@ export default function MyExpensesAccordion(props) {
         if (data.length < 1) {
           setMessage("No expenses found");
         } else {
+          setMessage();
           setExpenses(data);
           setExpensesAccordionTab("Expenses Found");
         }
@@ -74,6 +78,13 @@ export default function MyExpensesAccordion(props) {
       setError(error.response.data.error);
     }
   };
+  const handleScopeChange = (selectedOption) => {
+    setSearchFormData((prev) => ({
+      ...prev,
+      scope: selectedOption.value,
+    }));
+  };
+
   return (
     <>
       <div className="my-4 bg-white rounded-md p-6" tabIndex="0">
@@ -137,17 +148,10 @@ export default function MyExpensesAccordion(props) {
                 />
 
                 <div className="w-full pb-2">
-                  <input
-                    className="bg-white w-full px-4 py-4 rounded-md focus:outline-none focus:border-slate-600 border-[1px] border-slate-400 text-slate-500"
-                    placeholder="Scope (optional)"
-                    value={searchFormData.scope || ""}
-                    onChange={(e) =>
-                      setSearchFormData((prev) => ({
-                        ...prev,
-                        scope: e.target.value,
-                      }))
-                    }
-                  ></input>
+                  <ScopeSelect
+                    selectedValue={searchFormData.scope}
+                    handleScopeChange={handleScopeChange}
+                  />
                 </div>
                 {message && <p className="pb-2 text-slate-400">{message}</p>}
                 {error && <p className="pb-2 text-red-400">{error}</p>}
@@ -167,6 +171,18 @@ export default function MyExpensesAccordion(props) {
           {expensesAccordionTab == "View" && (
             <>
               <ExpensesView
+                setExpensesAccordionTab={setExpensesAccordionTab}
+                viewExpense={viewExpense}
+                apiUrl={apiUrl}
+              />
+            </>
+          )}
+          {expensesAccordionTab == "Edit" && (
+            <>
+              <ExpensesEdit
+                fetchExpenses={fetchExpenses}
+                searchFormData={searchFormData}
+                apiUrl={apiUrl}
                 setExpensesAccordionTab={setExpensesAccordionTab}
                 viewExpense={viewExpense}
               />

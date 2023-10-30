@@ -74,13 +74,13 @@ export default function ExpensesFound(props) {
           </div>
           <div className="h-[1rem]"></div>
           <div className="w-full flex space-x-4">
-            <button
+            {/* <button
               className="bg-white w-full py-2 rounded-md border-[1px] border-slate-400 text-slate-500"
               type="button"
               onClick={generatePayslip}
             >
               Generate Payslip
-            </button>
+            </button> */}
             <button
               className="bg-white w-full py-2 rounded-md border-[1px] border-slate-400 text-slate-500"
               type="button"

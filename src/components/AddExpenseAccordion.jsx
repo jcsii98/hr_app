@@ -3,6 +3,8 @@ import { useState } from "react";
 import { format } from "date-fns";
 import axios from "axios";
 
+import ScopeSelect from "./ScopeSelect";
+
 export default function AddExpenseAccordion(props) {
   const { openSection, setOpenSection, apiUrl, projectView } = props;
 
@@ -52,6 +54,13 @@ export default function AddExpenseAccordion(props) {
       setMessage();
       setErrors(error.response.data.errors);
     }
+  };
+
+  const handleScopeChange = (selectedOption) => {
+    setExpenseFormData((prev) => ({
+      ...prev,
+      scope: selectedOption.value,
+    }));
   };
 
   return (
@@ -112,18 +121,10 @@ export default function AddExpenseAccordion(props) {
               ></input>
             </div>
             <div className="w-full pb-2">
-              <input
-                value={expenseFormData.scope || ""}
-                onChange={(e) =>
-                  setExpenseFormData((prev) => ({
-                    ...prev,
-                    scope: e.target.value,
-                  }))
-                }
-                className="w-full px-4 py-4 rounded-md focus:outline-none focus:border-slate-600 border-[1px] border-slate-400"
-                type="text"
-                placeholder="Scope"
-              ></input>
+              <ScopeSelect
+                selectedValue={expenseFormData.scope}
+                handleScopeChange={handleScopeChange}
+              />
             </div>
             <div className="w-full pb-2">
               {" "}
