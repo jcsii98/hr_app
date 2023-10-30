@@ -106,7 +106,7 @@ export default function AddExpenseAccordion(props) {
                 placeholder="Name / Short Description"
               ></input>
             </div>
-            <div className="w-full pb-2">
+            {/* <div className="w-full pb-2">
               <input
                 value={expenseFormData.date || ""}
                 onChange={(e) =>
@@ -119,7 +119,7 @@ export default function AddExpenseAccordion(props) {
                 type="date"
                 placeholder="date"
               ></input>
-            </div>
+            </div> */}
             <div className="w-full pb-2">
               <ScopeSelect
                 selectedValue={expenseFormData.scope}
